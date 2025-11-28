@@ -34,6 +34,7 @@ public class Graph<N extends Comparable<N>, W extends Number> {
 
     // get neighbours of a node
     public List<N> getNeighbours(N node) {
+        System.out.println(edges);
         return edges.getOrDefault(node, Collections.emptyMap())
                 .keySet().stream().peek(System.out::println)
                 .toList();
@@ -62,10 +63,10 @@ public class Graph<N extends Comparable<N>, W extends Number> {
         graph.addEdge("C", "D", 3);
 
 
-        var weight = graph.getGraphWeight();
-        System.out.println(weight);
+//        var weight = graph.getGraphWeight();
+//        System.out.println(weight);
 
-        var list = graph.getNeighbours("D");
-        System.out.println(list);
+        var list = graph.getNeighbours("A");
+        System.out.println("Edges of A:" + list + " ");
     }
 }
