@@ -87,6 +87,47 @@ public class ListMain {
 
         Collections.sort(books, new Book.TitleComparator());
 
+        System.out.println();
+        ListIterator<Book> bookListIterator = books.listIterator();
+        while (bookListIterator.hasNext()) {
+            System.out.println(bookListIterator.next());
+        }
+        System.out.println();
+        while (bookListIterator.hasPrevious()) {
+            System.out.println(bookListIterator.previous());
+        }
+
+        List<String> list1 = new ArrayList<>();
+        list1.add("A");
+        list1.add("B");
+        list1.add("C");
+        for (String s : list1) {
+            // Fail fast iterators
+            // expectedModCount vs modCount
+            // modCount != expectedModCount -> throw new ConcurrentModificationException()
+            // list1.add("D"); Error
+            System.out.println(s);
+        }
+
+        // Fail safe iterators
+        // CopyOnWriteArrayList, CopyOnWriteArraySet
+
+        List<Integer> numList = Arrays.asList(1, 2, 3, 4, 5); // Returns a fixed size list
+        // numList.add(6); // Error
+        numList.set(2, 10);
+        System.out.println(numList);
+
+        numList = new ArrayList<>(List.of(1, 2, 3, 4, 5));
+        // subList(fromIndex, toIndex) -> fromIndex (inclusive) to toIndex (exclusive)
+        List<Integer> subList = numList.subList(1, 2); // [2]
+        // sublist creates a view based on the original list
+        // when a sublist is modified, the original list is also modified
+        subList.set(0, 10);
+        System.out.println(numList);
+        // structural changes to the original list invalidates the sublist
+        numList.add(6);
+        System.out.println(subList.get(0));
+
     }
 }
 
