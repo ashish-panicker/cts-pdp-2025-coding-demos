@@ -1,5 +1,7 @@
 package org.miniorm.core;
 
+import org.miniorm.core.v2.MetadataV2;
+
 public class SQLGenerator {
 
     public static String generateInsertSQL(Metadata metaData) {
