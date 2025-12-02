@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class WordCountConcurrentHashMap {
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) throws InterruptedException {
+
         List<String> list = Arrays.asList(
                 "apple banana mango apple",
                 "banana apple kiwi mango",
@@ -30,15 +31,21 @@ public class WordCountConcurrentHashMap {
         Thread t5 = new Thread(task);
 
         t1.start();
-        t2.start(); t3.start(); t4.start(); t5.start();
+        t2.start();
+        t3.start();
+        t4.start();
+        t5.start();
 
         t1.join();
-        t2.join(); t3.join(); t4.join(); t5.join();
+        t2.join();
+        t3.join();
+        t4.join();
+        t5.join();
 
 
         System.out.println("Final word count");
-        for(var entry: wordCount.entrySet()) {
-            System.out.println(entry.getKey()+ " - " + entry.getValue());
+        for (var entry : wordCount.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
         }
 
     }
