@@ -13,7 +13,7 @@ public class CFStudentProgressDemo {
                     CompletableFuture.supplyAsync(() -> {
                         sleep(800);
                         System.out.println("Attendance calculated");
-                        return 92;  // %
+                        return 92;
                     }, executor).exceptionally(ex -> {
                         System.out.println("Attendance task failed: " + ex.getMessage());
                         return 0;
@@ -33,7 +33,7 @@ public class CFStudentProgressDemo {
                     CompletableFuture.supplyAsync(() -> {
                         sleep(1000);
                         System.out.println("Extra factor evaluated");
-                        return 7; // out of 10
+                        return 7;
                     }, executor).exceptionally(ex -> {
                         System.out.println("Extra task failed: " + ex.getMessage());
                         return 0;
