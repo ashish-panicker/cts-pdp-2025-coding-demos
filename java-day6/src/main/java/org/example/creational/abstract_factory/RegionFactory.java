@@ -1,4 +1,4 @@
-package org.example.structural.abstract_factory;
+package org.example.creational.abstract_factory;
 
 public interface RegionFactory {
     Ride createRide(String category);

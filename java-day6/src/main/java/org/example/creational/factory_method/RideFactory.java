@@ -1,4 +1,4 @@
-package org.example.structural.factory_method;
+package org.example.creational.factory_method;
 
 public interface RideFactory {
     Ride createRide();

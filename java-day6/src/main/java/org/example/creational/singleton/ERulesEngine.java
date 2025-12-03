@@ -1,4 +1,4 @@
-package org.example.structural.singleton;
+package org.example.creational.singleton;
 
 public enum ERulesEngine {
     INSTANCE; // singleton instance

@@ -1,4 +1,4 @@
-package org.example.structural.builder;
+package org.example.creational.builder;
 
 // Represents a ride requested by the user
 // Pick up, drop locations, distance, ride type,
