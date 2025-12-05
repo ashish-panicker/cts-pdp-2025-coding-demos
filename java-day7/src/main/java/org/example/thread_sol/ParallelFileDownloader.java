@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 public class ParallelFileDownloader {
     public static void main(String[] args) {
         String[] files = new String[]{"file1", "file2", "file3", "file4", "file5"};
-
+        createUsingExecutorService(files);
 
     }
 
