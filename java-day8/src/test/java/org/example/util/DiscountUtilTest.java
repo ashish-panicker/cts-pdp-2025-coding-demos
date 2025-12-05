@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class DiscountUtilTest {
 
@@ -34,6 +36,13 @@ class DiscountUtilTest {
     void calculateDiscount_amountBelow2000_return0PercentDiscount() {
         var discount = util.calculateDiscount(1000);
         assertEquals(0, discount, 0.001);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"6000,1200", "3000,300", "1000,0"})
+    void calculateDiscount_withVariousAmounts_returnCorrectDiscount(double amount, double expected) {
+        var discount = util.calculateDiscount(amount);
+        assertEquals(expected, discount, 0.001);
     }
 
 

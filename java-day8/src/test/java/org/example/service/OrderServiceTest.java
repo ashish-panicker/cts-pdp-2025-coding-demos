@@ -2,13 +2,18 @@ package org.example.service;
 
 import org.example.model.Item;
 import org.example.model.Order;
+import org.example.repository.OrderParam;
 import org.example.repository.OrderRepository;
 import org.example.util.DiscountUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +23,12 @@ class OrderServiceTest {
     DiscountUtil util;
     OrderService service;
     Order order1, order2;
+
+    public static Stream<OrderParam> orderInputs() {
+        return Stream.of(
+                new OrderParam(new Order(3, List.of(new Item("Filter Coffee maker", 3000, 3))), 9000)
+        );
+    }
 
     @BeforeEach
     public void setUp() {
@@ -36,6 +47,19 @@ class OrderServiceTest {
         assertTrue(repo.findById(2).isPresent());
         assertEquals(1200, util.calculateDiscount(6000), 0.001);
         assertEquals(4800, saved.getTotal(), 0.001);
+    }
+
+    @ParameterizedTest
+    @MethodSource("orderInputs")
+    void createOrder_withValidOrderParam_appliesDiscountAndSaveOrder(OrderParam param){
+        var saved = service.createOrder(param.order());
+        assertEquals(param.expectedTotal(), param.order().getTotal());
+    }
+
+    @Test
+    void getOrder_nonExistingId_throwsIllegalArgumentException() {
+        var exception = assertThrows(IllegalArgumentException.class, () -> service.getOrder(10));
+        assertTrue(exception.getMessage().contains("Order id does not correspond to an actual order"));
     }
 
 }
