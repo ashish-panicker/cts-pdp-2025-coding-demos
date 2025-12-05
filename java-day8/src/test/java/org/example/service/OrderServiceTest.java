@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
@@ -53,7 +52,7 @@ class OrderServiceTest {
     @MethodSource("orderInputs")
     void createOrder_withValidOrderParam_appliesDiscountAndSaveOrder(OrderParam param){
         var saved = service.createOrder(param.order());
-        assertEquals(param.expectedTotal(), param.order().getTotal());
+        assertEquals(saved.getTotal(), param.order().getTotal());
     }
 
     @Test

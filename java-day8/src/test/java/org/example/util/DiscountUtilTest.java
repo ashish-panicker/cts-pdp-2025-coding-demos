@@ -3,6 +3,7 @@ package org.example.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -43,6 +44,19 @@ class DiscountUtilTest {
     void calculateDiscount_withVariousAmounts_returnCorrectDiscount(double amount, double expected) {
         var discount = util.calculateDiscount(amount);
         assertEquals(expected, discount, 0.001);
+    }
+
+    @RepeatedTest(10)
+    void calculateDiscount_randomInputs_returnCorrectDiscount() {
+        double amount = Math.random() * 7000; // 0-7000
+        var discount = util.calculateDiscount(amount);
+        if (amount > 5000) {
+            assertEquals(amount * .20, discount, 0.001);
+        } else if (amount > 2000) {
+            assertEquals(amount * .10, discount, 0.001);
+        } else {
+            assertEquals(0, discount, 0.001);
+        }
     }
 
 

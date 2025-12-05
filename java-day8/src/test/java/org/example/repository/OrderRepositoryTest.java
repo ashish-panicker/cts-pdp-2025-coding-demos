@@ -4,6 +4,7 @@ import org.example.model.Item;
 import org.example.model.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -48,5 +49,16 @@ class OrderRepositoryTest {
         repo.save(order2);
         repo.deleteAll();
         assertEquals(0, repo.getAll().size());
+    }
+
+    @RepeatedTest(10)
+    void createOrder_randomOrders_createAndSaveOrder() {
+        int id = (int) (Math.random() * 10000);
+        double price = Math.random() * 5500;
+        int qty = 1 + (int) (Math.random() * 5);
+        var order = new Order(id, List.of(new Item("Random Item" + id, price, qty)));
+        repo.save(order);
+        var saved = repo.findById(id).orElseThrow();
+        assertEquals(price * qty, saved.getTotal());
     }
 }

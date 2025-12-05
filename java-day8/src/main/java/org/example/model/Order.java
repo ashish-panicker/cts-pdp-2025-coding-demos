@@ -6,19 +6,23 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @Getter
-@RequiredArgsConstructor
 public class Order {
 
     private final int id;
     private final List<Item> items;
     private double total;
 
+    public Order(int id, List<Item> items) {
+        this.id = id;
+        this.items = items;
+        this.total = calculateTotal();
+    }
+
     public void applyDiscount(double discount) {
         this.total -= discount;
     }
 
     public double calculateTotal() {
-        this.total =  items.stream().mapToDouble(i -> i.price() * i.quantity()).sum();
-        return this.total;
+        return items.stream().mapToDouble(i -> i.price() * i.quantity()).sum();
     }
 }
