@@ -8,8 +8,13 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Entity classes that are going to be managed by the persistence provider -->
-        <class>org.example.jpa.entity.EmployeeDetails</class>
-        <class>org.example.jpa.elms.Employee</class>
+<!--        <class>org.example.jpa.entity.EmployeeDetails</class>-->
+<!--        <class>org.example.jpa.elms.Employee</class>-->
+        <class>org.example.jpa.library.Book</class>
+        <class>org.example.jpa.library.BookDetail</class>
+        <class>org.example.jpa.library.Category</class>
+        <class>org.example.jpa.library.Author</class>
+        <class>org.example.jpa.library.Reader</class>
 
         <properties>
             <!-- JDBC -->

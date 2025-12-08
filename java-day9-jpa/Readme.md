@@ -45,3 +45,51 @@ ORM maps
 - Managed/Persistent
 - Detached
 - Removed
+
+### JPA Relationship Mappings
+
+**Many To One**
+
+Many Employees One Department. This is one of the most common relationship. Foreign Key is created on the many side.
+
+**One To Many**
+
+One Department Many Employees. Inverse of the previous. Foreign Key is created on the many side.
+
+**One To One**
+
+One Employee One Profile. Generally rare uses Foreign Key or shared Primary Key.
+
+**Many To Many**
+
+Many Employees Many Projects. Usually rare. Uses Join Table.
+
+**Cascade Operations**
+
+Determines what should happen to the related entities when the owning side is persisted or removed.
+Different cascade types:
+- PERSIST
+- MERGE
+- REMOVE
+- REFRESH
+- DETACH
+- ALL
+
+**Orphan removal**
+
+This will remove the inverse or child records when the parent records are removed.
+
+**Fetch Stratergy**
+
+When the parent record is fetched will the child records be fetched along with it.
+- EAGER [OneToOne, ManyToOne]
+- LAZY [OneToMany, ManyToMany]
+
+**Example - Library Management**
+
+- Author: Writes many Books 
+- Book: Written by one Author, belongs to one category, has one detailed description
+- BookDetail: Has one detail about one book
+- Category: Contains multiple books
+- Reader: Can borrow many books
+

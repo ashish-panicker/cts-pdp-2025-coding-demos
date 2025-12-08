@@ -14,10 +14,22 @@ import lombok.Setter;
 )
 public class Employee {
 
+    public Employee(String name, String email, Address address, Status status,
+                    String bio, byte[] picture, Boolean active) {
+        this.fullName = name;
+        this.email = email;
+        this.homeAddress = address;
+        this.mailingAddress = address;
+        this.status = status;
+        this.bio = bio;
+        this.pic = picture;
+        this.isActive = active;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "elms_emp_sq")
     @SequenceGenerator(name = "elms_emp_sq", sequenceName = "elms_emp_sq", allocationSize = 50)
-    private Long empId;
+    private Long id;
 
     @Column(name = "full_name", nullable = false, length = 100)
     private String fullName;
@@ -55,4 +67,6 @@ public class Employee {
             @AttributeOverride(name = "zipCode", column = @Column(name = "mail_zipCode"))
     })
     private Address mailingAddress;
+
+
 }
