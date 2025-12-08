@@ -8,13 +8,17 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Entity classes that are going to be managed by the persistence provider -->
-<!--        <class>org.example.jpa.entity.EmployeeDetails</class>-->
-<!--        <class>org.example.jpa.elms.Employee</class>-->
-        <class>org.example.jpa.library.Book</class>
-        <class>org.example.jpa.library.BookDetail</class>
-        <class>org.example.jpa.library.Category</class>
-        <class>org.example.jpa.library.Author</class>
-        <class>org.example.jpa.library.Reader</class>
+        <!--        <class>org.example.jpa.entity.EmployeeDetails</class>-->
+        <!--        <class>org.example.jpa.elms.Employee</class>-->
+        <!--        <class>org.example.jpa.library.Book</class>-->
+        <!--        <class>org.example.jpa.library.BookDetail</class>-->
+        <!--        <class>org.example.jpa.library.Category</class>-->
+        <!--        <class>org.example.jpa.library.Author</class>-->
+        <!--        <class>org.example.jpa.library.Reader</class>-->
+        <class>org.example.jpa.payment.Payment</class>
+        <class>org.example.jpa.payment.CardPayment</class>
+        <class>org.example.jpa.payment.CashPayment</class>
+        <class>org.example.jpa.payment.UpiPayment</class>
 
         <properties>
             <!-- JDBC -->
@@ -27,7 +31,9 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.highlight_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.generate_statistics" value="true"/>
         </properties>
 
     </persistence-unit>

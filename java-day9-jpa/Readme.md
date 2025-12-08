@@ -93,3 +93,16 @@ When the parent record is fetched will the child records be fetched along with i
 - Category: Contains multiple books
 - Reader: Can borrow many books
 
+### JPA Inheritance
+
+```java
+abstract class Payment {}
+class CardPayment extends Payment {}
+class CashPayment extends Payment {}
+class UpiPayment extends Payment {}
+```
+
+There are 3 startergies that you can apply here:
+- **SINGLE_TABLE**
+- **JOINED**
+- **TABLE_PER_CLASS**
