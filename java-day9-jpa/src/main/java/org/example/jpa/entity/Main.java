@@ -1,14 +1,11 @@
-package org.example;
-
-import org.example.jpa.entity.Employee;
-import org.example.jpa.entity.JPAUtil;
+package org.example.jpa.entity;
 
 public class Main {
     public static void main(String[] args) {
         try (var em = JPAUtil.entityManager()) {
             System.out.println("Creating employee.");
             var tx = em.getTransaction();
-            var emp = Employee.builder().name("Ashish").salary(25000).build();
+            var emp = EmployeeDetails.builder().name("Ashish").salary(25000).build();
             tx.begin();
             em.persist(emp);
             /*
@@ -28,7 +25,7 @@ public class Main {
 
             var id = emp.getId();
             System.out.println("Fetching emp based on id: " + id);
-            var empFromDb = em.find(Employee.class, id);
+            var empFromDb = em.find(EmployeeDetails.class, id);
             System.out.println("Found employee: " + empFromDb);
 
 
@@ -55,7 +52,7 @@ public class Main {
 
             id = emp.getId();
             System.out.println("Fetching emp based on id: " + id);
-            empFromDb = em.find(Employee.class, id);
+            empFromDb = em.find(EmployeeDetails.class, id);
             System.out.println("Found employee: " + empFromDb);
 
             System.out.println("Removing employee:");
@@ -65,7 +62,7 @@ public class Main {
             tx.commit();
             System.out.println("Removed.");
 
-            empFromDb = em.find(Employee.class, id);
+            empFromDb = em.find(EmployeeDetails.class, id);
             System.out.println("Found employee: " + empFromDb);
 
 
