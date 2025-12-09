@@ -1,7 +1,11 @@
-package org.example.springbootrefresher.courses.dto;
+package org.example.springbootrefresher.courses.controller;
 
+import org.example.springbootrefresher.courses.dto.CourseRequest;
+import org.example.springbootrefresher.courses.dto.CourseResponse;
 import org.example.springbootrefresher.courses.model.Course;
 import org.example.springbootrefresher.courses.repository.CourseRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +41,7 @@ import java.net.URI;
 public class CourseController {
 
     private final CourseRepository courseRepository;
+    private final Logger log = LoggerFactory.getLogger(CourseController.class);
 
     public CourseController(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
@@ -44,6 +49,8 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity<CourseResponse> create(@RequestBody CourseRequest request) {
+
+        log.info("Creating new course");
 
         Course course = new Course(request.id(), request.title(), request.duration());
         courseRepository.add(course);
@@ -62,11 +69,13 @@ public class CourseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CourseResponse> getById(@PathVariable int id) {
+        log.info("Finding course  with id {}", id);
         var found = courseRepository.findById(id);
         if (found.isPresent()) {
             var response = new CourseResponse(found.get(), HttpStatus.OK);
             return ResponseEntity.ok(response);
         }
+        log.error("Finding course failed for id {}", id);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .body(new CourseResponse(null, HttpStatus.NO_CONTENT));

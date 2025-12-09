@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
     <property name="LOG_PATTERN"
-              value="%-5level [%thread] %logger{36} - %msg%n"/>
+              value="%d [%X{requestId}] %-5level [%thread] %logger{36} - %msg%n"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -15,7 +15,15 @@
             <fileNamePattern>logs/app-logs.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder" >
+           <providers>
+               <level />
+               <timestamp />
+               <message />
+               <stackTrace />
+               <mdc />
+           </providers>
+        </encoder>
     </appender>
 
 

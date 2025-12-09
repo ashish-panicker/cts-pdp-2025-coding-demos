@@ -9,15 +9,20 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import javax.sql.DataSource;
+import java.util.concurrent.Executor;
 
 // Provide additional application configuration
 // Marks the class as source of custom or additional configurations
 @Configuration
 @EnableConfigurationProperties({AppProps.class})
+@EnableScheduling
+@EnableAsync
 public class CustomConfiguration {
-
 
     @Bean
     @ConditionalOnBean(EmailReaderService.class)
@@ -39,5 +44,16 @@ public class CustomConfiguration {
     @ConditionalOnClass(DataSource.class)
     public DBHeartBeatService dbHeartBeatService() {
         return new DBHeartBeatService();
+    }
+
+    @Bean(name = "bgExecutor")
+    public Executor executor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(12);
+        executor.setMaxPoolSize(24);
+        executor.setQueueCapacity(1024);
+        executor.setThreadNamePrefix("bgThread-");
+        executor.initialize();
+        return executor;
     }
 }
