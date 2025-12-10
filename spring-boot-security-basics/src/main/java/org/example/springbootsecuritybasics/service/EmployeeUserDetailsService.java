@@ -1,5 +1,6 @@
 package org.example.springbootsecuritybasics.service;
 
+import lombok.RequiredArgsConstructor;
 import org.example.springbootsecuritybasics.repository.EmployeeRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -11,9 +12,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeUserDetailsService implements UserDetailsService {
 
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

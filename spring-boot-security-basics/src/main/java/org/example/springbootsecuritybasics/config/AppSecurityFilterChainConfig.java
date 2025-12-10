@@ -23,7 +23,7 @@ public class AppSecurityFilterChainConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth ->
                         auth
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/login", "/auth/register").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/employee/**").hasAnyRole("ADMIN", "EMPLOYEE")
                         .anyRequest().authenticated()
