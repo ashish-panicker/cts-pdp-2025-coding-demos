@@ -5,7 +5,7 @@ import org.example.springbootsecuritybasics.dto.LoginRequest;
 import org.example.springbootsecuritybasics.dto.LoginResponse;
 import org.example.springbootsecuritybasics.dto.RegisterRequest;
 import org.example.springbootsecuritybasics.model.Employee;
-import org.example.springbootsecuritybasics.repository.EmployeeRepository;
+import org.example.springbootsecuritybasics.service.EmployeeService;
 import org.example.springbootsecuritybasics.service.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +23,7 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -44,7 +44,7 @@ public class AuthController {
     public String register(@RequestBody RegisterRequest request) {
 
         // Check if username already exists
-        if (employeeRepository.findByUserName(request.userName()).isPresent()) {
+        if (employeeService.findByUserName(request.userName()).isPresent()) {
             return "Username already exists!";
         }
 
@@ -55,7 +55,7 @@ public class AuthController {
                 .isEnabled(true)
                 .build();
 
-        employeeRepository.save(employee);
+        employeeService.save(employee);
 
         return "User registered successfully!";
     }
