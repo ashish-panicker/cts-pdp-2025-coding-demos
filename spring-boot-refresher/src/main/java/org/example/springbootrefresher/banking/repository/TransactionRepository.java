@@ -1,6 +1,8 @@
 package org.example.springbootrefresher.banking.repository;
 
 import org.example.springbootrefresher.banking.model.Transaction;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,4 +15,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             select * from transactions order by amount desc limit 5
             """, nativeQuery = true)
     List<Transaction> findTopTransactions();
+
+    Page<Transaction> findByOrderByAmountDesc(Pageable pageable);
+
 }

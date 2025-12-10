@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: jwt-security-app
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ashish
+    password: password
+    url: jdbc:mysql://localhost:3306/corp_security?useSSL=false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8080
+logging:
+  level:
+    root: info
+    org.springframework.security: debug
+jwt:
+  secret: ad647a034acbf86bf9b6c4095e3f56633058224ce164b8fe42fc05b837197f70
+  expiration: 360000
