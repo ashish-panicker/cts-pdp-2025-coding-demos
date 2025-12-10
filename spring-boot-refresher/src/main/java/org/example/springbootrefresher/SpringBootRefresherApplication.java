@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /*
- * Spring boot auto configuration
+ * Spring boot autoconfiguration
  * Spring boot will automatically scan the class path and load all the spring beans
  * Spring achieves this the use of @Conditional annotation
  * Example:
@@ -17,7 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * - @EnableAutoConfiguration - trigger spring boot auto config
  * - @ComponentScan - scans the root package for beans
  *
- * How does auto configuration works?
+ * How does autoconfiguration works?
  * Withe help of certain classes
  * - DataSourceAutoConfiguration
  * - WebMvcAutoConfiguration
@@ -45,7 +45,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * --- [@Service, @Repository, @Component, @Configuration, @RestController, @Controller]
  * --- load them into application context
  *
- * 6. Process auto configuration classes
+ * 6. Process autoconfiguration classes
  * --- data source setup
  * --- jackson setup
  * --- embedded tomcat setup
@@ -55,7 +55,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 7. Create and initialize beans
  * --- execute constructor injection
  * --- @PostConstruct call backs
- * --- Bean post processing
+ * --- Bean post-processing
  * --- AOP proxies
  *
  * 8. Start the tomcat embedded server

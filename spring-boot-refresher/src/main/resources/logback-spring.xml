@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
+
     <property name="LOG_PATTERN"
               value="%d [%X{requestId}] %-5level [%thread] %logger{36} - %msg%n"/>
 
@@ -11,21 +12,30 @@
 
     <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/app-logs.log</file>
+
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/app-logs.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder" >
-           <providers>
-               <level />
-               <timestamp />
-               <message />
-               <stackTrace />
-               <mdc />
-           </providers>
-        </encoder>
-    </appender>
 
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+
+                <timestamp/>
+                <level/>
+                <threadName/>
+                <loggerName/>
+                <message/>
+                <stackTrace/>
+
+                <mdc/>
+
+                <globalCustomFields>{"service":"my-spring-refresher-app"}</globalCustomFields>
+
+            </providers>
+        </encoder>
+
+    </appender>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
