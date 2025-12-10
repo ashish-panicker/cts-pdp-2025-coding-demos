@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-//@Component
+@Component
 @Slf4j
 public class SampleDataLoader {
 
-//    @Bean
+    @Bean
     public CommandLineRunner loadData(
             BranchRepository branchRepository,
             CustomerRepository customerRepository,
@@ -53,6 +53,12 @@ public class SampleDataLoader {
 
             customerRepository.save(customer1);
             customerRepository.save(customer2);
+
+            customer1.setEmail("rahul.sharma@gmail.com");
+            customerRepository.save(customer1);
+
+            customer1.setPhone("9876543211");
+            customerRepository.save(customer1);
 
             AuditLog log1 = new AuditLog();
             log1.setAction("CUSTOMER_CREATED");
