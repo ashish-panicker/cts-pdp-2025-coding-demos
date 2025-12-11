@@ -1,7 +1,9 @@
 package org.example.springbootsecuritybasics.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.springbootsecuritybasics.service.security.LoginAttemptService;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +40,10 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @RestControllerAdvice(annotations = RestController.class)
-@Order(1)
+@RequiredArgsConstructor
 public class GlobalExceptionHandler {
+
+    private final LoginAttemptService loginAttemptService;
 
     private ApiError buildError(HttpStatus status, String message, String path) {
         return new ApiError(LocalDateTime.now(), status.value(), status.getReasonPhrase(), message, path);
@@ -51,8 +55,18 @@ public class GlobalExceptionHandler {
 //        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
 //    }
 
+    private void writeFailedLoginAttempt(String userName, String ip, String ua, String reason) {
+        loginAttemptService.record(userName, false, ip, ua, reason);
+    }
+
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ApiError> handleAuthentication(AuthenticationException ex, HttpServletRequest req) {
+        writeFailedLoginAttempt(
+                req.getAttribute("LOGIN_USER").toString(),
+                req.getRemoteAddr(),
+                req.getHeader("User-Agent"),
+                ex.getMessage()
+        );
         ApiError error = buildError(HttpStatus.UNAUTHORIZED, ex.getMessage(), req.getRequestURI());
         log.error("Authentication Exception: ", ex);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
