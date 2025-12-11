@@ -13,9 +13,9 @@ import java.util.Optional;
  * AuditorAware: Plugs into Spring Data JPA and supply the auditor aka current user
  * Enables audit trails and helps to populate @CreatedBy @ModifiedBy fields
  */
-@Component("auditAwareRef")
-@Primary
 @Slf4j
+@Primary
+@Component("auditAwareRef")
 public class AppAuditorAwareRef implements AuditorAware<String> {
 
     @Override

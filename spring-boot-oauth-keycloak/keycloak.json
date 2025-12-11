@@ -1,0 +1,28 @@
+{
+  "realm": "demo",
+  "enabled": true,
+  "clients": [
+    {
+      "clientId": "spring-resource",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "spring-secret",
+      "protocol": "openid-connect",
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true
+    }
+  ],
+  "roles": {
+    "realm": [
+      { "name": "user" }
+    ]
+  },
+  "users": [
+    {
+      "username": "alice",
+      "enabled": true,
+      "credentials": [ { "type": "password", "value": "alice", "temporary": false } ],
+      "realmRoles": ["user"]
+    }
+  ]
+}
