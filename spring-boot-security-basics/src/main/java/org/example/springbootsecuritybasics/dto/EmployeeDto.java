@@ -5,4 +5,5 @@ public record EmployeeDto(
         String username,
         String role,
         boolean enabled
-) {}
+) {
+}

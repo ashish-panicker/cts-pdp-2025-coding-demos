@@ -1,20 +1,21 @@
 package org.example.springbootsecuritybasics.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.example.springbootsecuritybasics.dto.LoginRequest;
 import org.example.springbootsecuritybasics.dto.LoginResponse;
 import org.example.springbootsecuritybasics.dto.RegisterRequest;
+import org.example.springbootsecuritybasics.exceptions.ApiError;
 import org.example.springbootsecuritybasics.model.Employee;
 import org.example.springbootsecuritybasics.service.EmployeeService;
 import org.example.springbootsecuritybasics.service.JwtService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -59,4 +60,11 @@ public class AuthController {
 
         return "User registered successfully!";
     }
+
+
+//    @ExceptionHandler(UsernameNotFoundException.class)
+//    public ResponseEntity<ApiError> handleUsernameNotFoundException(Exception ex, HttpServletRequest req) {
+//        return
+//    }
+
 }
