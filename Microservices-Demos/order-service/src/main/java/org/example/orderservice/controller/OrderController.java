@@ -6,6 +6,7 @@ import org.example.orderservice.dto.ReserveStock;
 import org.example.orderservice.feignclients.ProductFeignClient;
 import org.example.orderservice.model.Order;
 import org.example.orderservice.repository.OrderRepository;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ public class OrderController {
 
     private final OrderRepository repository;
     private final ProductFeignClient client;
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Order> findById(@PathVariable Long id) {
