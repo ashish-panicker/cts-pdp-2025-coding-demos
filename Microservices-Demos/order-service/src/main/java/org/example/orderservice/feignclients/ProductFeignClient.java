@@ -6,12 +6,12 @@ import org.example.orderservice.dto.ReserveStock;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "product-service")
+@FeignClient(name = "product-service", path = "/api/products")
 public interface ProductFeignClient {
 
-    @GetMapping("/api/products/{id}")
+    @GetMapping("/{id}")
     ProductResponse getProductById(@PathVariable Long id);
 
-    @PostMapping("/api/products/reserve-stock")
+    @PostMapping("/reserve-stock")
     Boolean reserveStock(@RequestBody ReserveStock reserveStock);
 }
