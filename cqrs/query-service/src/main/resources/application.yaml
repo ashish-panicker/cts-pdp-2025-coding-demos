@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: query-service
+  data: # 2Zw9PuNdDBTysNPz
+    mongodb:
+      uri:
+      database:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    properties:
+      schema.registry.url: http://localhost:8081
+      specific.avro.reader: true
+logging:
+  level:
+    root: info
+server:
+  port: 9100
