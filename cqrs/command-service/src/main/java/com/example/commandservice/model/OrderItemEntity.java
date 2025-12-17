@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class OrderItem {
+public class OrderItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class OrderItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+    private OrderEntity orderEntity;
 
     @Column(nullable = false)
     private String productId;
@@ -29,7 +29,7 @@ public class OrderItem {
     @Column(nullable = false)
     private Double price;
 
-    public OrderItem(String productId, Integer quantity, Double price) {
+    public OrderItemEntity(String productId, Integer quantity, Double price) {
         this.productId = productId;
         this.quantity = quantity;
         this.price = price;

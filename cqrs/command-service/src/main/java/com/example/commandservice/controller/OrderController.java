@@ -1,7 +1,7 @@
 package com.example.commandservice.controller;
 
-import com.example.commandservice.model.Order;
-import com.example.commandservice.model.OrderItem;
+import com.example.commandservice.model.OrderEntity;
+import com.example.commandservice.model.OrderItemEntity;
 import com.example.commandservice.model.OrderStatus;
 import com.example.commandservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -22,25 +22,25 @@ public class OrderController {
 
     @PostMapping("/place-order")
     public String placeOrder() {
-        var item1 = OrderItem.builder()
+        var item1 = OrderItemEntity.builder()
                 .productId(UUID.randomUUID().toString()).quantity(10).price(100.0)
                 .build();
-        var item2 = OrderItem.builder()
+        var item2 = OrderItemEntity.builder()
                 .productId(UUID.randomUUID().toString()).quantity(25).price(120.0)
                 .build();
-        var item3 = OrderItem.builder()
+        var item3 = OrderItemEntity.builder()
                 .productId(UUID.randomUUID().toString()).quantity(1).price(1000.0)
                 .build();
-        var order = Order.builder()
-                .orderItems(List.of(item1, item2, item3))
+        var order = OrderEntity.builder()
+                .orderItemEntities(List.of(item1, item2, item3))
                 .orderId(UUID.randomUUID().toString())
                 .customerId(UUID.randomUUID().toString())
                 .status(OrderStatus.PLACED)
                 .creationDate(Instant.now())
                 .build();
-        item1.setOrder(order);
-        item2.setOrder(order);
-        item3.setOrder(order);
+        item1.setOrderEntity(order);
+        item2.setOrderEntity(order);
+        item3.setOrderEntity(order);
         orderService.save(order);
         return "Order Placed";
     }

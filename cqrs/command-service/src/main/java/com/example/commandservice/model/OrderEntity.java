@@ -2,7 +2,6 @@ package com.example.commandservice.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 
 import java.time.Instant;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Order {
+public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,20 +32,20 @@ public class Order {
     @Column(nullable = false)
     private Instant creationDate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order",
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderEntity",
             orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems;
+    private List<OrderItemEntity> orderItemEntities;
 
 
-    public void addOrderItem(OrderItem orderItem) {
-        if(orderItem.getQuantity() <= 0) {
+    public void addOrderItem(OrderItemEntity orderItemEntity) {
+        if(orderItemEntity.getQuantity() <= 0) {
             throw new IllegalArgumentException("Quantity must be greater than zero.");
         }
-        orderItems.add(orderItem);
+        orderItemEntities.add(orderItemEntity);
     }
 
     public void markConfirmed() {
-        if(orderItems.isEmpty()) {
+        if(orderItemEntities.isEmpty()) {
             throw new IllegalArgumentException("Order has no order items.");
         }
         this.status = OrderStatus.CONFIRMED;
