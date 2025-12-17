@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "name": "OrderItem",
+  "namespace": "com.example.order.avro",
+  "fields": [
+    {
+      "name": "productId", "type": "string"
+    },
+    {
+      "name": "quantity", "type": "int"
+    },
+    {
+      "name": "price", "type": "double"
+    }
+  ]
+}

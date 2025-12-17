@@ -1,0 +1,11 @@
+{
+  "type": "enum",
+  "name": "OrderStatus",
+  "namespace": "com.example.order.avro",
+  "symbols": [
+    "PLACED",
+    "DELIVERED",
+    "CANCELLED",
+    "CONFIRMED"
+  ]
+}

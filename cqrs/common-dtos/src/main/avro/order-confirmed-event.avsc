@@ -1,0 +1,17 @@
+{
+  "type": "record",
+  "name": "OrderConfirmedEvent",
+  "namespace": "com.example.order.avro.events",
+  "fields": [
+    { "name": "eventId", "type": "string" },
+    {
+      "name": "eventTime",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    { "name": "orderId", "type": "string" },
+    { "name": "status", "type": "com.example.order.avro.OrderStatus" }
+  ]
+}
